@@ -19,7 +19,7 @@ public class Garage {
         ArrayList<GarageFloor> generatedFloors = new ArrayList<>(floorSizes.size());
 
         floorSizes.forEach(
-                value -> generatedFloors.add(new GarageFloor(value))
+                floorSize -> generatedFloors.add(new GarageFloor(floorSize))
         );
 
         return generatedFloors.toArray(GarageFloor[]::new);
@@ -34,7 +34,10 @@ public class Garage {
             }
         }
 
-        return null;
+        throw new GarageSpaceNotFoundException(String.format(
+                "Could not find garage space with ID: %d",
+                spaceId
+        ));
     }
 
     public boolean park(Vehicle vehicle, long spaceId) {
@@ -55,5 +58,11 @@ public class Garage {
         getSpaceById(spaceId).setParkedVehicle(null);
 
         return wasParked;
+    }
+
+    static class GarageSpaceNotFoundException extends RuntimeException {
+        public GarageSpaceNotFoundException(String message) {
+            super(message);
+        }
     }
 }

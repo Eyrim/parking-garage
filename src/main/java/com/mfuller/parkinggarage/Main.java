@@ -13,6 +13,8 @@ public class Main {
         garage.park(VehicleFactory.createVehicle(VehicleType.MOTORBIKE, new LicensePlate("LD15 UFX")), 40);
         garage.park(VehicleFactory.createVehicle(VehicleType.VAN, new LicensePlate("AT92LFD")), 10);
 
+        garage.getSpaceById(9999L);
+
         System.out.println("");
     }
 }
